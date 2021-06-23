@@ -111,7 +111,7 @@ Following is the screenshot of `RunDetails` widget:
 
 ![plot](./starter_file/Step1_AutoML_Capture1_run_details.PNG)
 
-The best model was the VotingEnsemble model with an accuracy of 87.63%
+The best Auto ML model was the VotingEnsemble model with an accuracy of 87.63%
 
 The ensemble models uses the weighted averages of models already been trained. In current case, the best VotingEnsemble model was weighted average of 7 different models.
 
@@ -124,13 +124,35 @@ Each of these 7 models were a combination of:
 
 
 ## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
+A Scikit-learn Logistic Regression model was trained whose hyperparameters were tuned using HyperDrive.
+
+Following were the two parameters tuned:
+
+1) regularization strength (C)
+2) maximum number of iterations (max_iter)
+
+Hyperdrive was used to identify the best hyperparameters since it randomly draws parameter from the available options and continues until it hits its early stopping policy or runs out of options.
+
+Random Parameter Sampling was used because it is much less time consuming and the accuracy obtained is comparable to other parameter sampling techniques (like Grid Sampling).
+
+The regularization strength (C) was uniformly chosen between 0.5 and 1 and maximum number of iterations were randomly selected between 50 and 100.
+
+Bandit Policy was used for early stopping. It is based on evaluation interval and slack factor. Bandit policy only keeps the best performing runs that are within the allowed slack factor and automatically terminate runs that are not producing good results.
 
 ### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+Following is the screenshot of `RunDetails` widget:
+
+![plot](./starter_file/Step2_hyperdrive_Capture1_run_details.PNG)
+
+The best Hyperdrive model had an accuracy of 85.33%
+
+From below, we can see the best parameters of the model were:
+1) regularization strength (C) = 0.689
+2) maximum number of iterations (max_iter) = 50
+
+![plot](./starter_file/Step2_hyperdrive_Capture2_best_model.PNG)
 
 ## Model Deployment
 *TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
