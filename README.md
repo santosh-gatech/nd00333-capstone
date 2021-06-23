@@ -1,13 +1,31 @@
-# nd00333-capstone
+# Azure ML Project - Predicting Heart Failure 
 
-*NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
+Heart failure is a common event caused by Cardiovascular diseases (CVDs) and this dataset contains 12 features that can be used to predict mortality by heart failure. 
 
-# Your Project Title Here
+Machine learning models can be of great importance for early detection and management for people with cardiovascular disease or who are at high cardiovascular risk (due to the presence of one or more risk factors such as hypertension, diabetes, hyperlipidaemia or already established disease).
 
-*TODO:* Write a short introduction to your project.
+It's a classificaiton task and we will be using two approaches to find the solution:
+
+1) Train a model using AutoML
+2) Train a model using Hyperdrive
+
+We will then deploy the best model as a webservice and test it by sending a request to the model endpoint.
 
 ## Project Set Up and Installation
-*OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
+
+This project has been implemented in Azure ML.
+
+1) First you need to setup a workplace in Azure ML Studio.
+
+2) Then create a compute instance VM to run jupyter notebooks.
+
+3) You can then install some starter files for following some steps for running an experiment using AutoML and Hyperdrive:
+https://github.com/udacity/nd00333-capstone/tree/master/starter_file
+
+4) Then you can proceed to select the dataset of your own choice. Here, following dataset was chosen from Kaggle:
+https://www.kaggle.com/andrewmvd/heart-failure-clinical-data
+
+5) Select the best performing model (AutoML or Hyperdrive) and deploy it.
 
 ## Dataset
 
