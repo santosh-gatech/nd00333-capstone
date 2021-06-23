@@ -80,12 +80,48 @@ dataset = dataset.register(workspace=ws,
 ```
 
 ## Automated ML
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+
+Following is the code sample for my automl settings and configuration:
+
+One thing to note in the automl settings is that the primary metric I chose to improve was the "accuracy" of the model. The experiment_timeout_settings was set 20 minutes and max_concurrent_iterations to 5 considering the resources. All the other automl settings were kept to default value.
+
+In automl cofiguration file, I set the task as "classification" for predicting "DEATH_EVENT". I also enabled early stopping.
+
+```
+automl_settings = {
+    "experiment_timeout_minutes": 20,
+    "max_concurrent_iterations": 5,
+    "primary_metric" : 'accuracy'
+}
+
+automl_config = AutoMLConfig(compute_target=compute_target,
+                             task = "classification",
+                             training_data=dataset,
+                             label_column_name="DEATH_EVENT",
+                             enable_early_stopping= True,
+                             featurization= 'auto',
+                             debug_log = "automl_errors.log",
+                             **automl_settings
+                            )
+```
 
 ### Results
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+Following is the screenshot of `RunDetails` widget:
+
+![plot](./starter_file/Step1_AutoML_Capture1_run_details.PNG)
+
+The best model was the VotingEnsemble model with an accuracy of 87.63%
+
+The ensemble models uses the weighted averages of models already been trained. In current case, the best VotingEnsemble model was weighted average of 7 different models.
+
+Each of these 7 models were a combination of:
+
+1) one training algorithm (XGBoostClassifier, LightGBM, Random Forest) and
+2) one data transformation technique (Sparse Normalizer, Standard Scaler wrapper).
+
+![plot](./starter_file/Step1_AutoML_Capture2_best_model.PNG)
+
 
 ## Hyperparameter Tuning
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
