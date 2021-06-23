@@ -213,6 +213,18 @@ Below you can also see the logs for the service:
 
 ![plot](./starter_file/Step3_deploy_Capture3_logs.PNG)
 
+## Future Work
+
+I would also like to try different primary target metric like AUC, or f1-score to see the robustness of the model. 
+
+We can observe that the best model accuracy is still below 90%. So there is a lot of scope to improve the accuracy. 
+
+One approach to improve accuracy is to try different data augmentation techniques. 
+
+Also, feature engineering might also play a important role in improving the model.
+
+Deep learning architectures are one of the best ML models for classification task but the only problem is that these architectures are data hungry. If the training data can be successfully increased by data augmentation techniques, it would be very helpful. 
+
 ## Screen Recording
 
 https://youtu.be/WTB592d4Kts
