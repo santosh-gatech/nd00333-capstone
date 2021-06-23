@@ -2,12 +2,12 @@
 
 This project demonstrates the ability to use an external dataset in Azure ML workspace, train a model using the different tools available in the AzureML framework as well as the ability to deploy the model as a web service.
 
-We will be using two approaches to find the solution:
+I will be using two approaches to find the solution:
 
 1) Train a model using AutoML
 2) Train a model using Hyperdrive
 
-We will then deploy the best model as a webservice and test it by sending a request to the model endpoint.
+I will then deploy the best model as a webservice and test it by sending a request to the model endpoint.
 
 ## Project Set Up and Installation
 
@@ -202,6 +202,12 @@ deploy_service.wait_for_deployment(show_output=True)
 After confirming that the endpoint is healthy, I send a request to the service via `endpoint.py` script which sends 2 input data requests.  
 
 ![plot](./starter_file/Step3_deploy_Capture1_endpoint.PNG)
+
+In the below image, we can see the results when `endpoint.py` script is executed. We get 2 outputs as expected. 
+
+Also, you can observe that I tested the deployed service by submitting 5 input data samples in another way. We can observe that for the 5 input samples, the predicted values were same as truth values.
+
+![plot](./starter_file/Step3_deploy_Capture4_endpoint_result.png)
 
 Below you can also see the logs for the service:
 
