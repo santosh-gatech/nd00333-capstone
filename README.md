@@ -155,7 +155,57 @@ From below, we can see the best parameters of the model were:
 ![plot](./starter_file/Step2_hyperdrive_Capture2_best_model.PNG)
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+
+The best performing model was the VotingEnsemble model which was obtained from Azure AutoML approach with an accuracy of 87.63%.
+
+I deployed the above model in following way:
+
+1) First I register the model and get the environment
+```
+# Register model
+
+ml_model = remote_run.register_model(
+    model_name=model_name,
+    description='Best AutoML model' 
+)
+
+env = best_model.get_environment()
+```
+
+2) Then create the inference config with application insights enabled
+```
+infer_config = InferenceConfig(entry_script='score.py', environment=env)
+service_config = AciWebservice.deploy_configuration(
+    cpu_cores=1,
+    memory_gb=1,
+    enable_app_insights=True
+)
+```
+
+3) And deploy the model
+```
+service_name = 'heart-project-service'
+
+deploy_service = Model.deploy(
+    ws,
+    service_name,
+    [ml_model],
+    infer_config,
+    service_config
+)
+
+deploy_service.wait_for_deployment(show_output=True)
+```
+
+![plot](./starter_file/Step3_deploy_Capture2_endpoint.PNG)
+
+After confirming that the endpoint is healthy, I send a request to the service via `endpoint.py` script which sends 2 input data requests.  
+
+![plot](./starter_file/Step3_deploy_Capture1_endpoint.PNG)
+
+Below you can also see the logs for the service:
+
+![plot](./starter_file/Step3_deploy_Capture3_logs.PNG)
 
 ## Screen Recording
 
